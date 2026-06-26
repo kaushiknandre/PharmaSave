@@ -61,6 +61,6 @@ public class User {
     }
 
     public enum Role {
-        ADMIN, PHARMACIST, CASHIER, INVENTORY_MANAGER, CUSTOMER
+        ADMIN, PHARMACIST, CASHIER, INVENTORY_MANAGER
     }
 }
