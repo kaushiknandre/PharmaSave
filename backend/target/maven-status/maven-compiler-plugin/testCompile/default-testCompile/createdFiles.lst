@@ -1,0 +1,4 @@
+com\example\demo\security\JwtServiceTest.class
+com\example\demo\service\DealEvaluationServiceTest.class
+com\example\demo\service\PromotionWindowServiceTest.class
+com\example\demo\DemoApplicationTests.class
