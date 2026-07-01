@@ -7,6 +7,7 @@ import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.example.demo.jwt.JwtService;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +15,7 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
     public String register(RegisterRequest request) {
 
@@ -52,6 +54,6 @@ public class AuthService {
             return "Invalid password";
         }
 
-        return "Login successful";
+        return jwtService.generateToken(user.getUsername());
     }
 }
