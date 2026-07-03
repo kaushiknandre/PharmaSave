@@ -29,9 +29,29 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+
+        // Public APIs
+        .requestMatchers("/api/auth/**").permitAll()
+
+        // ADMIN only
+        .requestMatchers("/api/categories/**").hasRole("ADMIN")
+
+        // ADMIN + PHARMACIST
+        .requestMatchers("/api/medicines/**")
+        .hasAnyRole("ADMIN", "PHARMACIST")
+
+        // ADMIN + CASHIER
+        .requestMatchers("/api/sales/**")
+        .hasAnyRole("ADMIN", "CASHIER")
+
+        // ADMIN + INVENTORY_MANAGER
+        .requestMatchers("/api/purchases/**")
+        .hasAnyRole("ADMIN", "INVENTORY_MANAGER")
+
+        // Everything else requires login
+        .anyRequest().authenticated()
+)
+                
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
