@@ -43,6 +43,9 @@ public class Medicine {
 
     @Column(nullable = false)
     private String strength;  // e.g. "500mg", "10ml"
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Supermarket supermarket;
 
     @Column(name = "purchase_price", nullable = false, precision = 10, scale = 2)
     private BigDecimal purchasePrice;
@@ -113,4 +116,11 @@ public class Medicine {
     public enum DosageForm {
         TABLET, CAPSULE, SYRUP, INJECTION, CREAM, OINTMENT, DROPS, INHALER, PATCH, POWDER, SUSPENSION, GEL, LOTION
     }
+    package com.example.demo.entity;
+
+    public enum Supermarket {
+    DMART,
+    RELIANCE,
+    MORE
+    } 
 }

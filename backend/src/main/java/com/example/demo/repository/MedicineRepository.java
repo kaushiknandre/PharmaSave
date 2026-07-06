@@ -13,7 +13,7 @@ public interface MedicineRepository extends JpaRepository<Medicine, Long> {
 
     List<Medicine> findByIsActiveTrue();
 
-    Optional<Medicine> findBySku(String sku);
+    List<Medicine> findAllBySku(String sku);
 
     List<Medicine> findByNameContainingIgnoreCase(String name);
 
