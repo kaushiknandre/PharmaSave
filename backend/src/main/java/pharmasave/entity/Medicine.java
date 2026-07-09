@@ -2,6 +2,7 @@ package pharmasave.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,7 +29,8 @@ public class Medicine {
     @Column(name = "brand_name")
     private String brandName;
 
-    @Column(unique = true)
+    // Changed from unique = true
+    @Column(nullable = false)
     private String sku;
 
     @Column(name = "batch_number")
@@ -42,7 +44,8 @@ public class Medicine {
     private DosageForm dosageForm;
 
     @Column(nullable = false)
-    private String strength;  // e.g. "500mg", "10ml"
+    private String strength;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Supermarket supermarket;
@@ -114,13 +117,18 @@ public class Medicine {
     }
 
     public enum DosageForm {
-        TABLET, CAPSULE, SYRUP, INJECTION, CREAM, OINTMENT, DROPS, INHALER, PATCH, POWDER, SUSPENSION, GEL, LOTION
+        TABLET,
+        CAPSULE,
+        SYRUP,
+        INJECTION,
+        CREAM,
+        OINTMENT,
+        DROPS,
+        INHALER,
+        PATCH,
+        POWDER,
+        SUSPENSION,
+        GEL,
+        LOTION
     }
-    package pharmasave.entity;
-
-    public enum Supermarket {
-    DMART,
-    RELIANCE,
-    MORE
-    } 
 }
