@@ -30,28 +30,31 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-        // Public APIs
-        .requestMatchers("/api/auth/**").permitAll()
+                        // Public APIs
+                        .requestMatchers("/api/auth/**").permitAll()
 
-        // ADMIN only
-        .requestMatchers("/api/categories/**").hasRole("ADMIN")
+                        // Week 3 Product Evaluation
+                        .requestMatchers("/api/evaluation/**").permitAll()
 
-        // ADMIN + PHARMACIST
-        .requestMatchers("/api/medicines/**")
-        .hasAnyRole("ADMIN", "PHARMACIST")
+                        // ADMIN only
+                        .requestMatchers("/api/categories/**")
+                        .hasRole("ADMIN")
 
-        // ADMIN + CASHIER
-        .requestMatchers("/api/sales/**")
-        .hasAnyRole("ADMIN", "CASHIER")
+                        // ADMIN + PHARMACIST
+                        .requestMatchers("/api/medicines/**")
+                        .hasAnyRole("ADMIN", "PHARMACIST")
 
-        // ADMIN + INVENTORY_MANAGER
-        .requestMatchers("/api/purchases/**")
-        .hasAnyRole("ADMIN", "INVENTORY_MANAGER")
+                        // ADMIN + CASHIER
+                        .requestMatchers("/api/sales/**")
+                        .hasAnyRole("ADMIN", "CASHIER")
 
-        // Everything else requires login
-        .anyRequest().authenticated()
-)
-                
+                        // ADMIN + INVENTORY_MANAGER
+                        .requestMatchers("/api/purchases/**")
+                        .hasAnyRole("ADMIN", "INVENTORY_MANAGER")
+
+                        // Everything else requires login
+                        .anyRequest().authenticated()
+                )
 
                 .addFilterBefore(
                         jwtAuthenticationFilter,
