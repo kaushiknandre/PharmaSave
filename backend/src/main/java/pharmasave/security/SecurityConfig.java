@@ -30,29 +30,53 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
+                        // ==========================
                         // Public APIs
+                        // ==========================
                         .requestMatchers("/api/auth/**").permitAll()
 
                         // Week 3 Product Evaluation
                         .requestMatchers("/api/evaluation/**").permitAll()
 
-                        // ADMIN only
+                        // ==========================
+                        // Week 4 APIs
+                        // ==========================
+
+                        // User Interaction Tracking
+                        .requestMatchers("/api/interactions/**")
+                        .hasAnyRole("ADMIN", "PHARMACIST", "CASHIER", "INVENTORY_MANAGER")
+
+                        // Personalized Recommendation
+                        .requestMatchers("/api/recommendations/**")
+                        .hasAnyRole("ADMIN", "PHARMACIST", "CASHIER", "INVENTORY_MANAGER")
+
+                        // ==========================
+                        // Admin APIs
+                        // ==========================
                         .requestMatchers("/api/categories/**")
                         .hasRole("ADMIN")
 
-                        // ADMIN + PHARMACIST
+                        // ==========================
+                        // Pharmacist APIs
+                        // ==========================
                         .requestMatchers("/api/medicines/**")
                         .hasAnyRole("ADMIN", "PHARMACIST")
 
-                        // ADMIN + CASHIER
+                        // ==========================
+                        // Cashier APIs
+                        // ==========================
                         .requestMatchers("/api/sales/**")
                         .hasAnyRole("ADMIN", "CASHIER")
 
-                        // ADMIN + INVENTORY_MANAGER
+                        // ==========================
+                        // Inventory APIs
+                        // ==========================
                         .requestMatchers("/api/purchases/**")
                         .hasAnyRole("ADMIN", "INVENTORY_MANAGER")
 
-                        // Everything else requires login
+                        // ==========================
+                        // All Remaining APIs
+                        // ==========================
                         .anyRequest().authenticated()
                 )
 
