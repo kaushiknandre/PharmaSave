@@ -1,7 +1,11 @@
 package pharmasave.entity;
 
 public enum Supermarket {
-    DMART,
-    RELIANCE,
-    MORE
+
+    WOOLWORTHS,
+    COLES,
+    CHEMIST_WAREHOUSE,
+    PRICELINE_PHARMACY,
+    TERRYWHITE_CHEMMART,
+    AMCAL
 }
